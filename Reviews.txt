@@ -1,0 +1,8 @@
+101 1 1 5 Excellent service and beautiful rooms!
+102 1 2 4 Good location but a bit noisy.
+103 2 3 5 Outstanding experience, highly recommended!
+104 2 1 4 Nice hotel, comfortable beds.
+105 3 2 3 Average facilities, needs improvement.
+106 1 4 5 Perfect for family vacation!
+107 3 5 2 Not worth the price.
+108 2 4 5 Amazing views and friendly staff!

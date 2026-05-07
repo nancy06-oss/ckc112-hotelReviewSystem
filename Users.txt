@@ -1,0 +1,5 @@
+1 Alice alice@email.com NewYork 500 Gold
+2 Bob bob@email.com LosAngeles 300 Silver
+3 Charlie charlie@email.com Chicago 800 Platinum
+4 Diana diana@email.com Houston 450 Gold
+5 Eve eve@email.com Phoenix 200 Bronze
