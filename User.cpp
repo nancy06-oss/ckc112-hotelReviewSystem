@@ -1,23 +1,24 @@
 #include "User.h"
 
-// Constructor - initializes user with default values
+// Constructor - initializes user with default/empty values
 User::User() {
-    userID = 0;
+    strcpy(userID, "");
     strcpy(userName, "");
+    strcpy(state, "");
     strcpy(email, "");
-    strcpy(city, "");
 }
 
-// Set user data
-void User::setUserData(int id, const char* name, const char* e, const char* c) {
-    userID = id;
+// Set user data with provided values
+// Parameters: id = user ID, name = user's name, st = state, e = email
+void User::setUserData(const char* id, const char* name, const char* st, const char* e) {
+    strcpy(userID, id);
     strcpy(userName, name);
+    strcpy(state, st);
     strcpy(email, e);
-    strcpy(city, c);
 }
 
 // Getter: User ID
-int User::getUserID() const {
+const char* User::getUserID() const {
     return userID;
 }
 
@@ -26,18 +27,18 @@ const char* User::getUserName() const {
     return userName;
 }
 
+// Getter: State
+const char* User::getState() const {
+    return state;
+}
+
 // Getter: Email
 const char* User::getEmail() const {
     return email;
 }
 
-// Getter: City
-const char* User::getCity() const {
-    return city;
-}
-
-// Virtual display method (can be overridden)
+// Virtual display method (overridden in Traveler class)
 void User::displayUser() const {
     cout << "User ID: " << userID << " | Name: " << userName 
-         << " | Email: " << email << " | City: " << city << "\n";
+         << " | State: " << state << " | Email: " << email << "\n";
 }

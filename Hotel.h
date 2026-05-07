@@ -7,30 +7,25 @@
 using namespace std;
 
 // Hotel class - manages hotel data and its reviews (COMPOSITION)
+// Represents a hotel property with multiple reviews from different travelers
 class Hotel {
 private:
-    int hotelID;
-    char hotelName[100];
-    char location[100];
-    int starRating;
-    Review hotelReviews[100];  // COMPOSITION: Array of Review objects
-    int reviewCount;
+    char hotelName[100];         // Hotel name
+    Review hotelReviews[100];    // COMPOSITION: Array of Review objects
+    int reviewCount;             // Count of reviews received
 
 public:
     // Constructor
     Hotel();
     
-    // Setter method
-    void setHotelData(int id, const char* name, const char* loc, int stars);
+    // Setter method - initializes hotel with name
+    void setHotelData(const char* name);
     
     // COMPOSITION: Add a review to this hotel
     void addReview(const Review& review);
     
     // Getter methods
-    int getHotelID() const;
     const char* getHotelName() const;
-    const char* getLocation() const;
-    int getStarRating() const;
     int getReviewCount() const;
     Review getReviewAt(int index) const;
     
@@ -46,7 +41,8 @@ public:
     // OPERATOR OVERLOADING: Compare hotels by average rating (>)
     bool operator>(const Hotel& other) const;
     
-    // OPERATOR OVERLOADING: Stream insertion for easy printing
+    // FRIEND FUNCTION: Allows external function to access private members
+    // This demonstrates FRIEND FUNCTION requirement
     friend ostream& operator<<(ostream& os, const Hotel& hotel);
 };
 

@@ -10,10 +10,11 @@ using namespace std;
 
 // Main entity-centric class that encapsulates entire system
 // COMPOSITION: Contains arrays of Hotel and Traveler objects
+// Single primary entity that manages all system operations
 class HotelSystem {
 private:
-    Hotel hotels[50];           // COMPOSITION: Array of Hotel objects
-    Traveler travelers[100];    // COMPOSITION: Array of Traveler objects
+    Hotel hotels[20];            // COMPOSITION: Array of Hotel objects (10 hotels)
+    Traveler travelers[100];     // COMPOSITION: Array of Traveler objects (10 travelers)
     int hotelCount;
     int travelerCount;
 
@@ -27,13 +28,13 @@ public:
     void saveReportsToFile(const char* filename);
     
     // Hotel operations
-    void findHotelByID(int hotelID);
+    void findHotelByName(const char* hotelName);
     void displayAllHotels() const;
     
     // Traveler operations
-    void findTravelerByID(int travelerID);
+    void findTravelerByID(const char* travelerID);
     void displayAllTravelers() const;
-    void displayTravelerProfile(int travelerID);
+    void displayTravelerProfile(const char* travelerID);
     
     // Menu-driven operations
     void displayPropertyDeepDive();
@@ -44,8 +45,8 @@ public:
     // Utility methods
     void findHighestRatedHotel() const;
     void rankAllHotels() const;
-    int findHotelIndex(int hotelID) const;
-    int findTravelerIndex(int travelerID) const;
+    int findHotelIndex(const char* hotelName) const;
+    int findTravelerIndex(const char* travelerID) const;
     
     // Manual review input
     void addManualReview();

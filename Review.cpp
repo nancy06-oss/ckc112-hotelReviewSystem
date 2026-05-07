@@ -2,50 +2,37 @@
 
 // Constructor - initializes review with default values
 Review::Review() {
-    reviewID = 0;
-    hotelID = 0;
-    userID = 0;
     rating = 0;
     strcpy(comment, "");
+    strcpy(hotelName, "");
 }
 
 // Set all review data at once
-void Review::setReviewData(int rID, int hID, int uID, int r, const char* com) {
-    reviewID = rID;
-    hotelID = hID;
-    userID = uID;
+// Parameters: r = rating (1-5), com = comment, hotel = hotel name
+void Review::setReviewData(int r, const char* com, const char* hotel) {
     rating = r;
     strcpy(comment, com);
+    strcpy(hotelName, hotel);
 }
 
-// Getter: Review ID
-int Review::getReviewID() const {
-    return reviewID;
-}
-
-// Getter: Hotel ID
-int Review::getHotelID() const {
-    return hotelID;
-}
-
-// Getter: User ID
-int Review::getUserID() const {
-    return userID;
-}
-
-// Getter: Rating
+// Getter: Rating (1-5 stars)
 int Review::getRating() const {
     return rating;
 }
 
-// Getter: Comment
+// Getter: Comment text
 const char* Review::getComment() const {
     return comment;
 }
 
-// Display a single review
+// Getter: Hotel name
+const char* Review::getHotelName() const {
+    return hotelName;
+}
+
+// Display a single review with formatted output
 void Review::displayReview() const {
-    cout << "    Review ID: " << reviewID << " | Hotel ID: " << hotelID 
-         << " | User ID: " << userID << " | Rating: " << rating << "/5\n";
+    cout << "    Rating: " << rating << "/5 | Hotel: " << hotelName << "\n";
     cout << "    Comment: " << comment << "\n";
+    cout << "    ---\n";
 }

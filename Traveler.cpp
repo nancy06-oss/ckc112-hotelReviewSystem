@@ -1,22 +1,26 @@
 #include "Traveler.h"
 
 // Constructor - initializes traveler with default values
+// Calls parent class constructor via initialization list
 Traveler::Traveler() : User() {
+    strcpy(membershipLevel, "Silver");
     loyaltyPoints = 0;
-    strcpy(membershipLevel, "Bronze");
     reviewCount = 0;
 }
 
-// Set traveler-specific data
-void Traveler::setTravelerData(int id, const char* name, const char* e, 
-                               const char* c, int points, const char* membership) {
-    setUserData(id, name, e, c);  // Call parent class method
-    loyaltyPoints = points;
+// Set traveler-specific data with all parameters
+// Parameters: id, name, state, email from parent; membership level and loyalty points for traveler
+void Traveler::setTravelerData(const char* id, const char* name, const char* st, 
+                               const char* e, const char* membership, int points) {
+    // Call parent class method to set base user data
+    setUserData(id, name, st, e);
     strcpy(membershipLevel, membership);
+    loyaltyPoints = points;
     reviewCount = 0;
 }
 
-// COMPOSITION: Add a review to traveler's authored reviews
+// COMPOSITION: Add a review to traveler's collection
+// Maximum 50 reviews per traveler
 void Traveler::addReview(const Review& newReview) {
     if (reviewCount < 50) {
         reviewsAuthored[reviewCount] = newReview;
@@ -24,22 +28,22 @@ void Traveler::addReview(const Review& newReview) {
     }
 }
 
+// Getter: Membership Level (Silver, Gold, Platinum)
+const char* Traveler::getMembershipLevel() const {
+    return membershipLevel;
+}
+
 // Getter: Loyalty Points
 int Traveler::getLoyaltyPoints() const {
     return loyaltyPoints;
 }
 
-// Getter: Membership Level
-const char* Traveler::getMembershipLevel() const {
-    return membershipLevel;
-}
-
-// Getter: Review Count
+// Getter: Number of reviews authored
 int Traveler::getReviewCount() const {
     return reviewCount;
 }
 
-// Getter: Review at index
+// Getter: Review at specific index
 Review Traveler::getReviewAt(int index) const {
     if (index >= 0 && index < reviewCount) {
         return reviewsAuthored[index];
@@ -58,43 +62,49 @@ double Traveler::getAverageRating() const {
     return (double)totalRating / reviewCount;
 }
 
-// Add loyalty points
+// Add loyalty points to traveler's account
 void Traveler::addLoyaltyPoints(int points) {
     loyaltyPoints += points;
 }
 
-// Override parent's display method
+// Override parent's display method to show traveler-specific information
 void Traveler::displayUser() const {
-    cout << "=== TRAVELER PROFILE ===\n";
+    cout << "\n=== TRAVELER PROFILE ===\n";
     cout << "User ID: " << userID << " | Name: " << userName 
-         << " | Email: " << email << " | City: " << city << "\n";
-    cout << "Loyalty Points: " << loyaltyPoints << " | Membership: " << membershipLevel << "\n";
+         << " | State: " << state << "\n";
+    cout << "Email: " << email << "\n";
+    cout << "Membership Level: " << membershipLevel << "\n";
+    cout << "Loyalty Points: " << loyaltyPoints << "\n";
     cout << "Reviews Authored: " << reviewCount << "\n";
+    if (reviewCount > 0) {
+        cout << "Average Rating Given: " << getAverageRating() << "/5\n";
+    }
 }
 
 // Display all reviews authored by this traveler
 void Traveler::displayAllReviews() const {
-    cout << "\n--- Reviews Authored by " << userName << " ---\n";
+    cout << "\n--- Reviews Written by " << userName << " ---\n";
     if (reviewCount == 0) {
-        cout << "No reviews authored yet.\n";
+        cout << "This traveler has not written any reviews yet.\n";
         return;
     }
     for (int i = 0; i < reviewCount; i++) {
+        cout << "Review " << (i + 1) << ":\n";
         reviewsAuthored[i].displayReview();
     }
 }
 
-// OPERATOR OVERLOADING: Compare by loyalty points (>)
+// OPERATOR OVERLOADING: Compare two travelers by loyalty points (>)
 bool Traveler::operator>(const Traveler& other) const {
     return loyaltyPoints > other.loyaltyPoints;
 }
 
-// OPERATOR OVERLOADING: Compare by loyalty points (<)
+// OPERATOR OVERLOADING: Compare two travelers by loyalty points (<)
 bool Traveler::operator<(const Traveler& other) const {
     return loyaltyPoints < other.loyaltyPoints;
 }
 
-// OPERATOR OVERLOADING: Compare equality
+// OPERATOR OVERLOADING: Compare equality based on user ID
 bool Traveler::operator==(const Traveler& other) const {
-    return userID == other.userID;
+    return strcmp(userID, other.userID) == 0;
 }

@@ -6,28 +6,29 @@
 #include "Review.h"
 using namespace std;
 
-// Parent class: User (base class for all users)
+// Parent class: User (base class for all system users)
+// Encapsulates common user attributes
 class User {
 protected:
-    int userID;
-    char userName[100];
-    char email[100];
-    char city[50];
+    char userID[10];             // User ID (e.g., U001)
+    char userName[100];          // User's full name
+    char state[50];              // User's state/location
+    char email[100];             // User's email address
 
 public:
     // Constructor
     User();
     
-    // Setter method
-    void setUserData(int id, const char* name, const char* e, const char* c);
+    // Setter method - sets basic user data
+    void setUserData(const char* id, const char* name, const char* st, const char* e);
     
     // Getter methods
-    int getUserID() const;
+    const char* getUserID() const;
     const char* getUserName() const;
+    const char* getState() const;
     const char* getEmail() const;
-    const char* getCity() const;
     
-    // Display user information
+    // Display user information (can be overridden in derived classes)
     virtual void displayUser() const;
 };
 
